@@ -3,7 +3,6 @@ import pandas as pd
 from typing import Tuple, Union, List
 
 class DelayModel:
-
     def __init__(
         self
     ):
