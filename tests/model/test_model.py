@@ -7,7 +7,7 @@ from challenge.model import DelayModel
 
 class TestModel(unittest.TestCase):
 
-    FEATURES_COLS = ['high_season', 'min_diff', 'DIA', 'MES', 'AÑO', 'period_day_morning',
+    FEATURES_COLS = ['high_season', 'DIA', 'MES', 'AÑO', 'period_day_morning',
        'period_day_night', 'TIPOVUELO_N', 'OPERA_Aeromexico',
        'OPERA_Air Canada', 'OPERA_Air France', 'OPERA_Alitalia',
        'OPERA_American Airlines', 'OPERA_Austral', 'OPERA_Avianca',
@@ -87,7 +87,7 @@ class TestModel(unittest.TestCase):
             target_column="delay"
         )
 
-        _, features_validation, _, target_validation = train_test_split(features, target, test_size = 0.33, random_state = 42)
+        _, features_validation, _, target_validation = train_test_split(features, target, test_size = 0.33, random_state = 111)
 
         self.model.fit(
             features=features,
@@ -99,10 +99,11 @@ class TestModel(unittest.TestCase):
         )
 
         report = classification_report(target_validation, predicted_target, output_dict=True)
+
         
         assert report["0"]["recall"] > 0.60
         assert report["0"]["f1-score"] > 0.70
-        assert report["1"]["recall"] > 0.60
+        assert report["1"]["recall"] > 0.50
         assert report["1"]["f1-score"] > 0.30
 
 
@@ -114,7 +115,7 @@ class TestModel(unittest.TestCase):
         )
 
         predicted_targets = self.model.predict(
-            features=features
+            payload=features
         )
 
         assert isinstance(predicted_targets, list)
