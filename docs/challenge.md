@@ -50,10 +50,8 @@ The model implementation is located in `challenge/model.py` and contains the fol
 
 In the implementation of the `DelayModel`, we applied the Synthetic Minority Over-sampling Technique (SMOTE) to handle class imbalance in the dataset. This technique was used to generate synthetic samples for the minority class, which helps in balancing the dataset and improving the model's performance.
 
-### Steps Involved:
+## Api development
+We developed a FastAPI-based API to predict flight delays using the last model. The API includes endpoints for health checks and predictions. For predictions, it accepts flight details in JSON format, preprocesses the data, calculates additional features like high_season, min_diff, period_day, and delay, and then uses a pre-trained XGBoost model to make predictions. The preprocessing ensures all necessary columns are present and properly formatted. The API returns the prediction results in JSON format, and we added robust error handling to manage data preprocessing and prediction errors.
 
-1. **Data Preprocessing**:
-    - Converted `Fecha-I` and `Fecha-O` columns to datetime.
-    - Created new features: `high_season`, `min_diff`, and `period_day`.
-    - Generated dummy variables for categorical f
-
+## Deploy the model
+I could not deploy the API because my authentication system to enter the cloud started to fail, it does not allow me to enter the account through the CLI.
